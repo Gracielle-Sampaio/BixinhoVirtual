@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tamagotchi Simulator</title>
+</head>
+<body>
+    <div class="tamagotchi">
+        <div class="status">
+            <p>Felicidade: <span id="happiness">50</span></p>
+            <p>Fome: <span id="hunger">50</span></p>
+        </div>
+        <div class="actions">
+            <button id="feed">Alimentar</button>
+            <button id="play">Brincar</button>
+            <button id="pet">Fazer Carinho</button>
+            <button id="dress">Trocar de Roupa</button>
+        </div>
+    </div>
+    <script src="script.js">
+        const happinessElement = document.getElementById("happiness");
+const hungerElement = document.getElementById("hunger");
+const feedButton = document.getElementById("feed");
+const playButton = document.getElementById("play");
+const petButton = document.getElementById("pet");
+const dressButton = document.getElementById("dress");
+
+let happiness = 50;
+let hunger = 50;
+
+function updateStatus() {
+    happiness -= 5;
+    hunger += 10;
+
+    happiness = Math.max(happiness, 0);
+    hunger = Math.min(hunger, 100);
+
+    happinessElement.textContent = happiness;
+    hungerElement.textContent = hunger;
+
+    if (happiness <= 0 || hunger >= 100) {
+        gameOver();
+    }
+}
+
+function feed() {
+    hunger -= 20;
+    hunger = Math.max(hunger, 0);
+    updateStatus();
+}
+
+function play() {
+    happiness += 10;
+    happiness = Math.min(happiness, 100);
+    updateStatus();
+}
+
+function pet() {
+    happiness += 5;
+    happiness = Math.min(happiness, 100);
+    updateStatus();
+}
+
+function dressUp() {
+    happiness += 2;
+    happiness = Math.min(happiness, 100);
+    updateStatus();
+}
+
+function gameOver() {
+    feedButton.disabled = true;
+    playButton.disabled = true;
+    petButton.disabled = true;
+    dressButton.disabled = true;
+
+    const gameOverMessage = document.createElement("p");
+    gameOverMessage.textContent = "Seu bichinho não está mais feliz ou com fome. Infelizmente, ele não resistiu. Fim de jogo.";
+    document.querySelector(".tamagotchi").appendChild(gameOverMessage);
+}
+
+feedButton.addEventListener("click", feed);
+playButton.addEventListener("click", play);
+petButton.addEventListener("click", pet);
+dressButton.addEventListener("click", dressUp);
+
+setInterval(updateStatus, 10000);
+
+    </script>
+</body>
+
+</html>
