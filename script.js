@@ -1,35 +1,36 @@
-const happinessElement = document.getElementById("happiness");
-        const feedButton = document.getElementById("feed");
-        const hungerElement = document.getElementById("hunger");
-        const petButton = document.getElementById("pet");
-        const playButton = document.getElementById("play");
+const happinessElement = document.getElementById("Felicidade");
 
-    let happiness = 50;
-    let hunger = 50;
+        const feedButton = document.getElementById("Alimentar");
+        const hungerElement = document.getElementById("Fome");
+        const petButton = document.getElementById("pet");
+        const playButton = document.getElementById("Brincar");
+
+    let happiness = 100;
+    let hunger = 0;
 
     function updateStatus() {
-        happiness -= 5;
-        hunger += 10;
+        felicidade = -5;
+        fome = +10;
 
-        happiness = Math.max(happiness, 0);
-        hunger = Math.min(hunger, 100);
+        felicidade = Math.max(felicidade, 0);
+        fome = Math.min(fome, 100);
 
-        happinessElement.textContent = happiness;
-        hungerElement.textContent = hunger;
+        happinessElement.textContent = felicidade;
+        hungerElement.textContent = fome;
 
-        if (happiness <= 0 || hunger >= 100) {
+        if (felicidade <= 0 || fome >= 100) {
             gameOver();
         }
     }
 
     function feed() {
-        hunger -= 20;
+        hunger = +10;
         hunger = Math.max(hunger, 0);
         updateStatus();
     }
 
     function play() {
-        happiness += 10;
+        happiness = +10;
         happiness = Math.min(happiness, 100);
         updateStatus();
     }
